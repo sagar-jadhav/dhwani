@@ -10,8 +10,8 @@ To be honest, there are more reasons than one! But the most primary one is the p
 
 ### Alright, how do I get started?
 So, we didn't build it from scratch 😐. You need to have *NodeJS* to run this library 😅.  
-Along with it, you also need [FFmpeg](http://ffmpeg.org/) installed on you machine. We use it for video to audio conversion.  
-Also, for other features we use *IBM Watson API.* You need to have your own API key to use these features.
+Along with it, you also need [FFmpeg](http://ffmpeg.org/) installed on you machine. We use it for video to audio conversions.  
+Also, for other features we use the *IBM Watson API.* You need to have your own API key to use these features.
 
 ### Alright I get that, but how do I install it?
 Now you have [FFmpeg](http://ffmpeg.org/) and [Node.js](https://nodejs.org/) installed. Let's go ahead with the installation of **Dhwani**.  
@@ -28,6 +28,6 @@ Otherwise, this manual approach can be used:
 Type `dhwani` into your command line to learn more! 
 
 ### Excuse me! I like the project. Can I also contribute to Dhwani?
-Yes, Sure! Check out [Issues](https://github.com/sagar-jadhav/dhwani/issues) to get started!
+Od course! Check out our open [Issues](https://github.com/sagar-jadhav/dhwani/issues) to get started!
 
 [![Open Source Helpers](https://www.codetriage.com/sagar-jadhav/dhwani/badges/users.svg)](https://www.codetriage.com/sagar-jadhav/dhwani)
