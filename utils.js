@@ -8,23 +8,30 @@ var extractedText = '';
 var keywords = '';
 var log = require('log');
 var chalk = require('chalk');
+var Spinner = require('cli-spinner').Spinner;
+var spinner = new Spinner('processing..%s');
+spinner.setSpinnerString('|/-\\');
 
 var convertVideoToAudio = async function(input_file, output_file) {
   log.info(`Converting video with Input file path: ${input_file}`);
   log.info(`Converting video with Input file path: ${output_file}`);
+  spinner.start();
   try {
     const extractedValue = await extractAudio({
       input: input_file,
       output: output_file,
     }).catch(function(error) {
+      spinner.stop(true);
       log.error(
         chalk.red(
           `Error trying to extract audio from video. Details: ${error.message}`
         )
       );
     });
+    spinner.stop(true);
     log.info(chalk.green('==> Successfully extracted audio.'));
   } catch (error) {
+    spinner.stop(true);
     log.error(
       chalk.red(
         `Error trying to convert video to audio. Details: ${error.message}`
@@ -52,13 +59,15 @@ var convertAudioToText = function(url, api_key, input_file, output_file) {
     content_type: 'audio/mp3',
     model: 'en-US_BroadbandModel',
   };
-
   // Create the stream.
   log.info('Creating stream...');
+  spinner.start();
   var recognizeStream = speechToText.recognizeUsingWebSocket(params);
+  spinner.stop(true);
 
   // Pipe in the audio.
   log.info('Piping in the audio...');
+  spinner.start();
   fs.createReadStream(input_file).pipe(recognizeStream);
 
   // Listen for events.
@@ -80,11 +89,13 @@ var convertAudioToText = function(url, api_key, input_file, output_file) {
           extractedText += value['transcript'];
         });
       });
+      spinner.stop(true);
       log.info(chalk.green(`==> Text extracted Successfully`));
     } else if (name === 'Close:') {
       log.info(`Writing extracted text into Outfile file: ${output_file}`);
       fs.writeFile(output_file, extractedText, err => {
         if (err) {
+          spinner.stop(true);
           log.error(
             chalk.red(
               `Error trying to create new file in system directory. Details: ${err.message}`
@@ -92,6 +103,7 @@ var convertAudioToText = function(url, api_key, input_file, output_file) {
           );
           return;
         }
+        spinner.stop(true);
         log.info(
           chalk.green(
             '==> Successfully written extracted text into Output file.'
@@ -99,6 +111,7 @@ var convertAudioToText = function(url, api_key, input_file, output_file) {
         );
       });
     } else if (name === 'Error:') {
+      spinner.stop(true);
       log.error(
         chalk.red(`Error while extracting text from audio. Please try again.`)
       );
@@ -114,7 +127,9 @@ var textAnalysis = function(url, api_key, input_file, output_file) {
     url: url,
   });
   log.info('Reading contents of Input file...');
+  spinner.start();
   var text = fs.readFileSync(input_file).toString('utf8');
+  spinner.stop(true);
 
   const analyzeParams = {
     text: text,
@@ -136,8 +151,10 @@ var textAnalysis = function(url, api_key, input_file, output_file) {
       log.info(
         'Text Analysis complete. Now writing the file to the Output file.'
       );
+      spinner.start();
       fs.writeFile(output_file, keywords, err => {
         if (err) {
+          spinner.stop(true);
           log.error(
             chalk.red(
               `Error trying to create new file in system directory. Details: ${err.message}`
@@ -145,6 +162,7 @@ var textAnalysis = function(url, api_key, input_file, output_file) {
           );
           return;
         }
+        spinner.stop(true);
         log.info(
           chalk.green(
             '==> Successfully written analyzed text file into Output file.'
@@ -154,6 +172,7 @@ var textAnalysis = function(url, api_key, input_file, output_file) {
       //console.log(JSON.stringify(analysisResults, null, 2));
     })
     .catch(err => {
+      spinner.stop(true);
       log.error(
         chalk.red(`Error trying to analyze text. Details: ${err.message}`)
       );
