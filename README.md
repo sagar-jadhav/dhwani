@@ -28,6 +28,6 @@ Otherwise, this manual approach can be used:
 Type `dhwani` into your command line to learn more! 
 
 ### Excuse me! I like the project. Can I also contribute to Dhwani?
-Od course! Check out our open [Issues](https://github.com/sagar-jadhav/dhwani/issues) to get started!
+Of course! Check out our open [Issues](https://github.com/sagar-jadhav/dhwani/issues) to get started!
 
 [![Open Source Helpers](https://www.codetriage.com/sagar-jadhav/dhwani/badges/users.svg)](https://www.codetriage.com/sagar-jadhav/dhwani)
