@@ -9,8 +9,8 @@ Well on a serious note we don't know. It was created with the following features
 3. Extraction of keywords from Text.
 
 ### Ok, what do I need to use it?
-So, we didn't build it from scratch 😐. You need to have *NodeJS* to run this library 😅.<br/>
-Along with it, you also need [FFmpeg](http://ffmpeg.org/) installed on your machine. We use it for a video to audio conversion.<br/>
+So, we didn't build it from scratch 😐. You need to have *NodeJS* to run this library 😅.
+Along with it, you also need [FFmpeg](http://ffmpeg.org/) installed on your machine. We use it for a video to audio conversion.
 Also, for other features we use *IBM Watson API.* You need to have your own API key to use these features.
 
 ### Alright I get that, but how do I install it?
